@@ -33,12 +33,12 @@ module.exports = function(app){
 		});
 	};
 
-	//Link routes
-	app.get('*', function(req,res){
-		res.sendfile('./public/index.html');
-	});
+	function NotFound(req,res){
+		res.send("Not Found!");
+	}
 
+	//Link routes
 	app.get('/api/:collectionName', FindFlightMonth);
 	app.get('/api/:collectionName/:id', FindFlightById);
-	
+	app.get('/*', NotFound);
 };
