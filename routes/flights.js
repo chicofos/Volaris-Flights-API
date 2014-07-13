@@ -33,10 +33,10 @@ module.exports = function(app){
 		});
 	};
 
-	// //Link routes
-	// app.get('*', function(req,res){
-	// 	res.sendfile('./public/index.html');
-	// });
+	//Link routes
+	app.get('*', function(req,res){
+		res.sendfile('./public/index.html');
+	});
 
 	app.get('/api/:collectionName', FindFlightMonth);
 	app.get('/api/:collectionName/:id', FindFlightById);
