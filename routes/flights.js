@@ -14,10 +14,18 @@ module.exports = function(app){
 	//Function to Find Data in Collection
 	function FindFlightMonth(req,res){
 		req.collection.find().toArray(function(err, results){
-			if(!err)
-				res.send(results)
+			if(!err){
+	  			if(results != null){
+	  				if(results.length == 0)
+			    		res.send("Date Not Found");
+			    	else
+			    		res.send(results);
+				}
+				else
+					res.send("Date Not Found");
+			}
 			else
-				res.send('Error:' + err);
+				res.send("Error:" + err);
 		});
 	};
 
@@ -26,15 +34,20 @@ module.exports = function(app){
 		
 	  var id = req.params.id;
 	  req.collection.findById(id, function(err, results){
-	  		if(!err)
-			    res.send(results)
+	  		if(!err){
+	  			if(results != null){
+				    res.send(results)
+				}
+				else
+					res.send('ID Not Found');
+			}
 			else
 				res.send('Error:' + err);
 		});
 	};
 
 	function NotFound(req,res){
-		res.send("Not Found!");
+		res.sendfile('public/notfound.html');
 	}
 
 	//Link routes

@@ -10,7 +10,6 @@ app.configure(function(){
 	app.use(express.bodyParser());
 });
 
-
 //Routes (Module)
 var routes = require('./routes/flights.js')(app);
 
