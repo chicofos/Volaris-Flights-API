@@ -1,0 +1,86 @@
+<!-- index.html -->
+<html ng-app='app'>
+<head>
+	<!-- META -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
+	<title>Volaris SPA</title>
+
+	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"><!-- load bootstrap -->
+	<style>
+		html 					{ overflow-y:scroll; }
+		body 					{ padding-top:50px; }
+		#todo-list 				{ margin-bottom:30px; }
+	</style>
+
+	<!-- SPELLS -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script><!-- load angular -->
+	<script src="https://code.angularjs.org/1.2.0rc1/angular-route.js"></script>
+	
+	<script src="core.js"></script>
+<script>
+var app = angular.module('app', ['ngRoute']);
+
+app.config(function ($routeProvider, $locationProvider) {
+	
+	//configure the routing rules here
+	$routeProvider.when('/api/:month', {
+		controller: 'mainCtrl'
+
+	//routing DOESN'T work without html5Mode
+	//$locationProvider.html5Mode(true);
+	});
+)};
+
+app.controller('mainCtrl', function($rootScope,$scope,$routeParams, $route){
+	var month;
+
+	$rootScope.$on('$routeChangeSuccess', function () {
+            console.log($routeParams.id);
+            console.log($routeParams.type)
+            month = $routeParams.id;
+        });
+
+	//$scope.data = {};
+
+	$http.get('/api/'+month)
+		.success(function(data){
+			//$scope.flights = data;
+			console.log(data);
+		})
+		.error(function(data){
+			console.log('error: '+data);
+		});
+});
+</script>
+</head>
+<body ng-controller="mainCtrl">
+	<div class="container">
+
+
+		<!-- TODO LIST -->
+		<div id="todo-list" class="row">
+			<div class="col-sm-4 col-sm-offset-4">
+
+			</div>
+		</div>
+
+		<!-- FORM TO CREATE TODOS -->
+		<div id="todo-form" class="row">
+			<div class="col-sm-8 col-sm-offset-2 text-center">
+				<form>
+					<div class="form-group">
+
+						<!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
+						<input type="text" class="form-control input-lg text-center" placeholder="I want to buy a puppy that will love me forever" ng-model="formData.text">
+					</div>
+
+				</form>
+			</div>
+		</div>
+
+	</div>
+
+</body>
+</html>

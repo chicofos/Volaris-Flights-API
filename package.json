@@ -1,0 +1,11 @@
+{
+  "name"         : "volaris-api",
+  "version"      : "1.0.0",
+  "description"  : "Simple page application",
+  "main"         : "server.js",
+  "author"       : "Fosco",
+  "dependencies" : {
+    "express"    : "~3.4.4",
+    "mongoskin"   : "1.4.4"
+    }
+}
