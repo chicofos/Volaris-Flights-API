@@ -13,7 +13,7 @@ module.exports = function(app){
 
 	//Function to Find Data in Collection
 	function FindFlightMonth(req,res){
-		req.collection.find({},{limit:10, sort: [['_id',-1]]}).toArray(function(err, results){
+		req.collection.find().toArray(function(err, results){
 			if(!err)
 				res.send(results)
 			else
@@ -23,8 +23,8 @@ module.exports = function(app){
 
 	//Function to Find Flight in a Month
 	function FindFlightById(req,res){
+		
 	  var id = req.params.id;
-
 	  req.collection.findById(id, function(err, results){
 	  		if(!err)
 			    res.send(results)
